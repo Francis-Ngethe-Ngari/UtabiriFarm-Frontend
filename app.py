@@ -17,7 +17,7 @@ def main():
     """)
 
     # URL of the Flask backend
-    backend_url = 'http://127.0.0.1:5000/predict'  # Adjust the URL if needed
+    backend_url = 'http://3.9.146.245/predict'  # Adjust the URL if needed
 
     # Path to the prediction history file
     prediction_file = '/home/sudotechpro/alx_learn/UtabiriFarm-Backend/predictions/predictions.txt'
