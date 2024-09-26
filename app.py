@@ -20,7 +20,7 @@ def main():
     backend_url = 'http://3.9.146.245/predict'  # Adjust the URL if needed
 
     # Path to the prediction history file
-    prediction_file = '/home/sudotechpro/alx_learn/UtabiriFarm-Backend/predictions/predictions.txt'
+    # prediction_file = '/home/sudotechpro/alx_learn/UtabiriFarm-Backend/predictions/predictions.txt'
 
     # Function to load the prediction history
     def load_prediction_history(file_path):
