@@ -23,61 +23,61 @@ def main():
     # prediction_file = '/home/sudotechpro/alx_learn/UtabiriFarm-Backend/predictions/predictions.txt'
 
     # Function to load the prediction history
-    def load_prediction_history(file_path):
-        if not os.path.exists(file_path):
-            st.write("Prediction file does not exist.")
-            return pd.DataFrame()
+    # def load_prediction_history(file_path):
+    #     if not os.path.exists(file_path):
+    #         st.write("Prediction file does not exist.")
+    #         return pd.DataFrame()
 
-        # Regular expression pattern to match each line
-        pattern = re.compile(
-            r'^(?P<timestamp>[^,]+),\s*User ID:\s*(?P<user_id>[^,]+),\s*Image:\s*(?P<image>[^,]+),\s*Prediction:\s*(?P<prediction>[^,]+),\s*Confidence:\s*(?P<confidence>[\d\.]+)'
-        )
+    #     # Regular expression pattern to match each line
+    #     pattern = re.compile(
+    #         r'^(?P<timestamp>[^,]+),\s*User ID:\s*(?P<user_id>[^,]+),\s*Image:\s*(?P<image>[^,]+),\s*Prediction:\s*(?P<prediction>[^,]+),\s*Confidence:\s*(?P<confidence>[\d\.]+)'
+    #     )
 
-        data = []
+    #     data = []
 
-        try:
-            with open(file_path, 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if not line:
-                        continue  # Skip empty lines
-                    match = pattern.match(line)
-                    if match:
-                        entry = match.groupdict()
-                        data.append(entry)
-                    else:
-                        st.error(f"Line format incorrect: {line}")
+    #     try:
+    #         with open(file_path, 'r') as f:
+    #             for line in f:
+    #                 line = line.strip()
+    #                 if not line:
+    #                     continue  # Skip empty lines
+    #                 match = pattern.match(line)
+    #                 if match:
+    #                     entry = match.groupdict()
+    #                     data.append(entry)
+    #                 else:
+    #                     st.error(f"Line format incorrect: {line}")
 
-            # Create DataFrame
-            df = pd.DataFrame(data)
-            if df.empty:
-                st.write("No prediction history available.")
-                return pd.DataFrame()
+    #         # Create DataFrame
+    #         df = pd.DataFrame(data)
+    #         if df.empty:
+    #             st.write("No prediction history available.")
+    #             return pd.DataFrame()
 
-            # Convert data types
-            df['timestamp'] = pd.to_datetime(df['timestamp'])
-            df['confidence'] = df['confidence'].astype(float)
+    #         # Convert data types
+    #         df['timestamp'] = pd.to_datetime(df['timestamp'])
+    #         df['confidence'] = df['confidence'].astype(float)
 
-            return df
-        except Exception as e:
-            st.error(f"Error reading prediction history: {e}")
-            return pd.DataFrame()
+    #         return df
+    #     except Exception as e:
+    #         st.error(f"Error reading prediction history: {e}")
+    #         return pd.DataFrame()
 
-    # Load the prediction history
-    history_df = load_prediction_history(prediction_file)
+    # # Load the prediction history
+    # history_df = load_prediction_history(prediction_file)
 
-    # Display the prediction history in the sidebar
-    st.sidebar.title('Prediction History')
+    # # Display the prediction history in the sidebar
+    # st.sidebar.title('Prediction History')
 
-    if not history_df.empty:
-        # Format the DataFrame
-        history_df['timestamp'] = history_df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
-        history_df['confidence'] = history_df['confidence'].apply(lambda x: f"{x * 100:.2f}%")
+    # if not history_df.empty:
+    #     # Format the DataFrame
+    #     history_df['timestamp'] = history_df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
+    #     history_df['confidence'] = history_df['confidence'].apply(lambda x: f"{x * 100:.2f}%")
         
-        # Display the DataFrame
-        st.sidebar.table(history_df)
-    else:
-        st.sidebar.write('No prediction history available.')
+    #     # Display the DataFrame
+    #     st.sidebar.table(history_df)
+    # else:
+    #     st.sidebar.write('No prediction history available.')
     # Add a file uploader
     uploaded_file = st.file_uploader('Choose an image...', type=['jpg', 'jpeg', 'png'])
 
@@ -108,8 +108,8 @@ def main():
                     st.write(f"**Prediction:** {result['class']}")
                     st.write(f"**Confidence:** {result['confidence'] * 100:.2f}%")
 
-                    # Reload the prediction history after a new prediction
-                    history_df = load_prediction_history(prediction_file)
+                    # # Reload the prediction history after a new prediction
+                    # history_df = load_prediction_history(prediction_file)
 
                     
                 except requests.exceptions.RequestException as e:
